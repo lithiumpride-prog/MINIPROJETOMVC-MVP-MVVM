@@ -36,6 +36,18 @@ class TestSuspeitoPresenter(unittest.TestCase):
         self.presenter.ao_solicitar_cadastro("Coringa", "Caos", "99")
         self.assertEqual(len(self.fake_view.mensagens_erro), 1)
 
+    def test_remocao_suspeito(self):
+        self.presenter.ao_solicitar_cadastro("Lex Luthor", "Lavagem de Dinheiro", "7")
+
+        self.presenter.ao_solicitar_remocao("1")
+        self.assertEqual(self.fake_view.mensagens_sucesso[-1], "Suspeito removido.")
+
+        self.presenter.ao_solicitar_listagem()
+        self.assertEqual(len(self.fake_view.ultimo_relatorio), 0)
+
+        self.presenter.ao_solicitar_remocao("1")
+        self.assertEqual(self.fake_view.mensagens_erro[-1], "ID não encontrado.")
+
 if __name__ == "__main__":
     unittest.main()
 
