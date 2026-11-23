@@ -1,9 +1,11 @@
+from view_model import SuspeitoViewModel
 from view import SuspeitoView
-from presenter import SuspeitoPresenter
+from log_view import LogAuditoriaView
 
 
 if __name__ == "__main__":
-    view = SuspeitoView()
-    presenter = SuspeitoPresenter(view)
-    view.set_presenter(presenter)
-    view.iniciar_loop()
+    vm = SuspeitoViewModel()
+    view_principal = SuspeitoView(vm)
+    view_auditoria = LogAuditoriaView(vm)
+
+    view_principal.iniciar()
